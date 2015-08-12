@@ -38,6 +38,7 @@ module.exports = function(robot) {
         "Standup time! Now! Go go go!"
     ];
 
+    var ROOM = process.env.HUBOT_STANDUP_ROOM;
     var PREPEND_MESSAGE = process.env.HUBOT_STANDUP_PREPEND || "";
     if (PREPEND_MESSAGE.length > 0 && PREPEND_MESSAGE.slice(-1) !== " ") {
         PREPEND_MESSAGE += " ";
@@ -108,7 +109,7 @@ module.exports = function(robot) {
     // Fires the standup message.
     function doStandup(room) {
         var message = PREPEND_MESSAGE + _.sample(STANDUP_MESSAGES);
-        robot.messageRoom(room, message);
+        robot.messageRoom(ROOM || room, message);
     }
 
     // Finds the room for most adaptors
